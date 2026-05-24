@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>@s.nova.vintage × Nykaa</title>
+<meta property="og:title" content="@s.nova.vintage × Nykaa — Sponsorship Pitch">
+<meta property="og:description" content="vintage Creator · 28.0K Followers · 5.8% Engagement">
+<meta property="og:image" content="https://api.dicebear.com/9.x/lorelei/svg?seed=s.nova.vintage&backgroundColor=transparent">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#FF4500;--text:#0a0805;--accent:#FF6030;--mu:rgba(240,244,255,.45);--br:rgba(255,255,255,.07)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;cursor:none;overflow-x:hidden}
+#cur{position:fixed;width:110px;height:110px;border:1.5px solid currentColor;border-radius:50%;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:all .12s ease;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.7);mix-blend-mode:difference}
+#cur span{font-size:7px;letter-spacing:.18em;text-align:center;line-height:1.5;text-transform:uppercase;opacity:0;transition:opacity .3s}
+#cur.drag span{opacity:1}#cur.drag{width:130px;height:130px}#cur.sm{width:10px;height:10px}
+#cdot{position:fixed;width:5px;height:5px;background:currentColor;border-radius:50%;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  color:rgba(255,255,255,.8)}
+.prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:200;width:0%;transition:width .1s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 32px;display:flex;
+  align-items:center;justify-content:space-between;mix-blend-mode:difference}
+.nl,.nc{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#fff}
+.nc{position:absolute;left:50%;transform:translateX(-50%);letter-spacing:.22em}
+.nr{display:flex;gap:24px}
+.nr span{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#fff}
+#hero{position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--bg)}
+#hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.42) 100%);pointer-events:none;z-index:1}
+#hero::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.4;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E")}
+.ht{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 44px;z-index:3;pointer-events:none}
+.hl{font-family:'Playfair Display',serif;font-size:clamp(64px,13vw,170px);font-weight:900;letter-spacing:-4px;line-height:.87;color:var(--text);user-select:none;will-change:transform;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.hl.l1{transform:translateX(-2%)}.hl.l2{transform:translateX(5%);text-indent:5vw}.hl.l3{transform:translateX(-1%)}
+#three-canvas{position:absolute;inset:0;z-index:4;width:100%;height:100%}
+.sh{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:10;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--text);display:flex;align-items:center;gap:10px}
+.sl{width:36px;height:1px;background:var(--text);animation:pls 2s ease-in-out infinite}
+.arb{position:absolute;bottom:26px;right:32px;z-index:10;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--text)}
+.ctb{position:absolute;bottom:26px;left:32px;z-index:10;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--text)}
+@keyframes pls{0%,100%{width:18px;opacity:.5}50%{width:44px;opacity:1}}
+.section{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
+.dark-section{background:#0a080a}
+.s001{padding:80px}
+.s001-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1200px;margin:0 auto;width:100%}
+.creator-profile{display:flex;flex-direction:column;gap:24px}
+
+/* PROFILE PHOTO */
+.profile-pic-wrap{position:relative;width:fit-content}
+.profile-pic{width:130px;height:130px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--accent);display:block;background:rgba(255,255,255,.05)}
+.profile-pic.is-svg{padding:16px;border-radius:50%;background:rgba(255,255,255,.06)}
+.profile-pic-ring{position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(255,255,255,.1);animation:spin 12s linear infinite}
+.profile-pic-dot{position:absolute;top:8px;right:8px;width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px #0a080a}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* UPLOAD HINT — shown only if using fallback avatar */
+.upload-hint{display:flex;align-items:center;gap:8px;padding:8px 14px;
+  background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.12);
+  border-radius:4px;font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(245,240,232,.35)}
+.upload-hint-icon{color:var(--accent);font-size:12px}
+
+.sc{position:absolute;top:32px;left:80px;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.18)}
+.sc.dk{color:rgba(10,8,5,.18)}
+.slb{font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:20px}
+.ch{font-family:'Playfair Display',serif;font-size:clamp(38px,7vw,82px);font-weight:900;letter-spacing:-2px;line-height:.9;color:#f5f0e8}
+.cat{color:var(--accent)}
+.cn{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-top:12px}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:20px}
+.sb{background:rgba(245,240,232,.04);border:1px solid rgba(245,240,232,.06);padding:22px 20px;transition:background .3s}
+.sb:hover{background:rgba(245,240,232,.07)}
+.sn{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,48px);font-weight:900;letter-spacing:-2px;color:#f5f0e8;line-height:1}
+.su{color:var(--accent)}
+.slbl{font-size:7px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:7px}
+.pr{padding-top:100px}
+.ptag{font-size:8px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.ptag::before{content:'';width:36px;height:1px;background:var(--accent)}
+.pg{font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,32px);font-weight:900;letter-spacing:-1px;color:#f5f0e8;line-height:1.1;margin-bottom:26px}
+.pb{font-size:12px;line-height:1.9;color:rgba(245,240,232,.58)}
+.pb p{margin-bottom:18px}.pb p:last-child{margin-bottom:0}
+.s002{padding:80px;flex-direction:column;justify-content:center}
+.s002-inner{max-width:1200px;margin:0 auto;width:100%}
+.s002h{margin-bottom:56px;display:flex;justify-content:space-between;align-items:flex-end}
+.s002t{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,68px);font-weight:900;letter-spacing:-2px;line-height:.9}
+.s002s{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--mu)}
+.ag{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.ab{background:#111009;padding:36px 26px;transition:all .3s;cursor:default}
+.ab:hover{background:var(--accent);transform:translateY(-4px)}
+.ai{font-size:20px;margin-bottom:16px;display:block}
+.av{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,44px);font-weight:900;letter-spacing:-2px;color:#f5f0e8;line-height:1;margin-bottom:6px}
+.ak{font-size:7px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.35)}
+.ab:hover .av{color:#111}.ab:hover .ak{color:rgba(0,0,0,.55)}.ab:hover .ai{filter:brightness(0)}
+.content-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.cg-item{aspect-ratio:1;overflow:hidden;position:relative}
+.cg-item img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.05);transition:filter .4s,transform .4s}
+.cg-item:hover img{filter:none;transform:scale(1.05)}
+.cg-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.4),transparent 50%)}
+.s003{padding:80px;background:#111009}
+.s003-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.mf{border:1px solid rgba(245,240,232,.07)}
+.mh{background:rgba(245,240,232,.04);border-bottom:1px solid rgba(245,240,232,.06);padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.mt{font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.mi{width:100%;display:block;min-height:300px;object-fit:cover;filter:brightness(.9) saturate(1.1)}
+.mc{padding:13px 20px;font-size:7px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.2);font-style:italic}
+.ms h3{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,56px);font-weight:900;letter-spacing:-2px;color:#f5f0e8;line-height:.9;margin-bottom:26px}
+.vt{display:inline-block;border:1px solid var(--accent);padding:5px 14px;font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.hr{width:100%;height:1px;background:rgba(245,240,232,.07);margin:28px 0}
+.s004{min-height:65vh;flex-direction:column;justify-content:center;padding:80px;text-align:center;background:var(--accent);position:relative;overflow:hidden}
+.s004::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.18) 100%)}
+.cp{font-family:'Playfair Display',serif;font-size:clamp(70px,15vw,190px);font-weight:900;letter-spacing:-5px;line-height:.85;color:var(--text);position:relative;z-index:1}
+.cs{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--text);margin:26px 0 12px;position:relative;z-index:1;opacity:.7}
+.cn2{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,8,5,.38);position:relative;z-index:1;margin-bottom:34px}
+.cb{position:relative;z-index:1;background:var(--text);color:var(--accent);font-size:9px;letter-spacing:.28em;text-transform:uppercase;padding:16px 48px;border:none;font-family:'Space Mono',monospace;cursor:none;transition:opacity .2s}
+.cb:hover{opacity:.85}
+footer{background:#0a080a;padding:36px 80px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(245,240,232,.06)}
+.fl{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.28)}
+.fr{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+@keyframes sUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
+.hl{animation:sUp .9s cubic-bezier(.16,1,.3,1) both}
+.l1{animation-delay:.1s}.l2{animation-delay:.22s}.l3{animation-delay:.34s}
+nav{animation:sUp .7s cubic-bezier(.16,1,.3,1) .05s both}
+@media(max-width:768px){
+  .s001-inner,.s003-inner{grid-template-columns:1fr}
+  .ag{grid-template-columns:1fr 1fr}
+  .s001,.s002,.s003,.s004{padding:52px 24px}
+  .pr{padding-top:36px}
+  nav{padding:18px 20px}
+  footer{padding:28px 24px;flex-direction:column;gap:12px;text-align:center}
+}
+  </style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+<div id="cur"><span>HOLD<br>AND<br>DRAG</span></div>
+<div id="cdot"></div>
+<nav>
+  <span class="nl">S.NOVA.VINTAGE</span>
+  <span class="nc">SPONSORSHIP.PITCH</span>
+  <div class="nr"><span>[ BRAND DECK ]</span><span>[ 001 ]</span><span>CONTACT</span></div>
+</nav>
+
+<section id="hero">
+  <div class="ht">
+    <div class="hl l1" data-speed="0.03">VINTAGE</div>
+    <div class="hl l2" data-speed="-0.04">MEETS</div>
+    <div class="hl l3" data-speed="0.025">MODERN</div>
+  </div>
+  <canvas id="three-canvas"></canvas>
+  <div class="sh"><div class="sl"></div>SCROLL FOR MORE<div class="sl"></div></div>
+  <div class="arb">[ AR ]</div>
+  <div class="ctb">001</div>
+</section>
+
+<section class="section dark-section s001">
+  <div class="sc">001 / CREATOR</div>
+  <div class="s001-inner">
+    <div class="creator-profile">
+      <div class="slb">The Creator</div>
+
+      <!-- PROFILE PHOTO -->
+      <div class="profile-pic-wrap">
+        <img
+          class="profile-pic is-svg"
+          src="https://api.dicebear.com/9.x/lorelei/svg?seed=s.nova.vintage&backgroundColor=transparent"
+          alt="@s.nova.vintage"
+          loading="eager">
+        <div class="profile-pic-ring"></div>
+        <div class="profile-pic-dot"></div>
+      </div>
+
+      <!-- Show upload hint only if using fallback avatar -->
+      
+      <div class="upload-hint">
+        <span class="upload-hint-icon">↑</span>
+        Add your photo in dashboard settings
+      </div>
+
+      <div>
+        <div class="ch"><span class="cat">@</span>s.nova.vintage</div>
+        <div class="cn">vintage Creator · aesthetic, curated, editorial</div>
+      </div>
+
+      <div class="sg">
+        <div class="sb">
+          <div class="sn">28.0K</div>
+          <div class="slbl">Followers</div>
+        </div>
+        <div class="sb">
+          <div class="sn">5.8<span class="su">%</span></div>
+          <div class="slbl">Engagement · 3.9× avg</div>
+        </div>
+        <div class="sb">
+          <div class="sn">72<span class="su">%</span></div>
+          <div class="slbl">Primary audience</div>
+        </div>
+        <div class="sb">
+          <div class="sn">88<span class="su">/100</span></div>
+          <div class="slbl">Brand fit score</div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:7px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.22);margin-bottom:8px">Content aesthetic</div>
+        <div class="content-grid">
+          
+          <div class="cg-item">
+            <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20instagram%20post%2C%20editorial%20photography%2C%20India%20style%2C%20film%20grain%2C%20warm%20tones%2C%20no%20text%2C%20no%20watermark%2C%20high%20quality?width=400&height=400&nologo=true&seed=2626" alt="Content" loading="lazy"
+              onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+          </div>
+          <div class="cg-item">
+            <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20instagram%20post%2C%20editorial%20photography%2C%20India%20style%2C%20film%20grain%2C%20warm%20tones%2C%20no%20text%2C%20no%20watermark%2C%20high%20quality?width=400&height=400&nologo=true&seed=2627" alt="Content" loading="lazy"
+              onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+          </div>
+          <div class="cg-item">
+            <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20instagram%20post%2C%20editorial%20photography%2C%20India%20style%2C%20film%20grain%2C%20warm%20tones%2C%20no%20text%2C%20no%20watermark%2C%20high%20quality?width=400&height=400&nologo=true&seed=2628" alt="Content" loading="lazy"
+              onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pr">
+      <div class="ptag">The Pitch · Nykaa</div>
+      <div class="pg">Influencer Partnerships Team,</div>
+      <div class="pb"><p>Nykaa's curation is exactly what my followers save on their wishlists every weekend — I figured it was time to make it official.</p><p>With 28,000 followers at a 5.8% engagement rate — nearly four times the industry average — my audience isn't just watching, they're buying. 72% are women aged 18–32 who already spend on curated beauty and fashion. They trust me because I'm one of them.</p><p>One post. ₹10,000. And it looks like it was always meant to be yours.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section s002" style="flex-direction:column;justify-content:center;background:#f5f0e8">
+  <div class="sc dk">002 / AUDIENCE</div>
+  <div class="s002-inner">
+    <div class="s002h">
+      <div class="s002t" style="color:#0a0805">WHO IS<br>WATCHING</div>
+      <div class="s002s">Audience<br>breakdown</div>
+    </div>
+    <div class="ag">
+      <div class="ab"><span class="ai">◎</span><div class="av">72<span style="font-size:.5em;color:var(--accent)">%</span></div><div class="ak">Primary gender</div></div>
+      <div class="ab"><span class="ai">◈</span><div class="av">18-32</div><div class="ak">Age range</div></div>
+      <div class="ab"><span class="ai">◉</span><div class="av">IND</div><div class="ak">Top location</div></div>
+      <div class="ab"><span class="ai">◆</span><div class="av">5.8<span style="font-size:.5em;color:var(--accent)">%</span></div><div class="ak">Engagement rate</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section s003">
+  <div class="sc">003 / MOCKUP</div>
+  <div class="s003-inner">
+    <div class="mf">
+      <div class="mh">
+        <span class="mt">AI Mockup — What a sponsored post looks like</span>
+        <span style="font-size:7px;letter-spacing:.2em;color:rgba(245,240,232,.2)">◉ ◎ ◆</span>
+      </div>
+      <img class="mi" src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20instagram%20post%2C%20Nykaa%20product%2C%20India%20aesthetic%2C%20editorial%20photography%2C%20film%20grain%20texture%2C%20warm%20tones%2C%20no%20text%20no%20watermark%2C%20high%20quality?width=600&height=400&nologo=true&seed=3868" alt="Mockup" loading="lazy"
+        onerror="this.style.minHeight='260px';this.style.background='rgba(255,69,0,.06)'">
+      <div class="mc">Concept only — creator-produced and brand-approved before posting</div>
+    </div>
+    <div class="ms">
+      <span class="vt">[ @s.nova.vintage ]</span>
+      <h3>WHAT NYKAA<br>LOOKS LIKE<br>ON THIS FEED.</h3>
+      <div class="hr"></div>
+      <div class="pb">
+        <p>Perfect niche and demographic match — vintage aesthetic creator for India's leading beauty platform targeting young women.</p>
+        <p>Approval before publishing. No long contracts. Simple and quick.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section s004" style="min-height:60vh">
+  <div class="cp">$120</div>
+  <div class="cs">Rate per sponsored post</div>
+  <div class="cn2">No long contracts · Approval before posting · 48hr turnaround</div>
+  <button class="cb" onclick="window.location.href='mailto:?subject=Nykaa x @s.nova.vintage'">
+    REPLY TO DISCUSS →
+  </button>
+</section>
+
+<footer>
+  <span class="fl">@s.nova.vintage · Instagram · vintage Creator</span>
+  <span class="fr">Powered by Sponsorship Prospector</span>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const cur=document.getElementById('cur'),cdot=document.getElementById('cdot');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cdot.style.left=mx+'px';cdot.style.top=my+'px'});
+setInterval(()=>{cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cur.style.left=cx+'px';cur.style.top=cy+'px'},16);
+document.querySelectorAll('button,.sb,.ab,.cg-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('sm'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('sm'));
+});
+window.addEventListener('scroll',()=>{
+  document.getElementById('prog').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+});
+document.addEventListener('mousemove',e=>{
+  const rx=(e.clientX/window.innerWidth-.5)*2,ry=(e.clientY/window.innerHeight-.5)*2;
+  document.querySelectorAll('.hl').forEach(el=>{
+    const sp=parseFloat(el.dataset.speed||0);
+    el.style.transform='translate('+(rx*sp*100)+'px,'+(ry*sp*40)+'px)';
+  });
+});
+const canvas=document.getElementById('three-canvas');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.5;
+const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,.1,100);
+camera.position.z=5;
+scene.add(new THREE.AmbientLight(0xffffff,.3));
+const dl=new THREE.DirectionalLight(0xffffff,1.5);dl.position.set(3,4,2);scene.add(dl);
+const pl=new THREE.PointLight(0xFF6030,.8,10);pl.position.set(-2,1,-2);scene.add(pl);
+scene.add(new THREE.Mesh(new THREE.SphereGeometry(50,32,32),new THREE.MeshBasicMaterial({color:16736304,side:THREE.BackSide})));
+const geo=new THREE.TorusKnotGeometry(1.1,.38,200,20,2,3);
+const mat=new THREE.MeshStandardMaterial({color:0xC8A97E,metalness:.95,roughness:.08});
+const obj=new THREE.Mesh(geo,mat);scene.add(obj);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(1.8,.012,8,100),new THREE.MeshBasicMaterial({color:16736304,transparent:true,opacity:.35}));
+scene.add(ring);
+let isDrag=false,px=0,py=0,vx=0,vy=0;
+canvas.addEventListener('mousedown',e=>{isDrag=true;px=e.clientX;py=e.clientY;vx=vy=0;cur.classList.add('drag')});
+window.addEventListener('mouseup',()=>{isDrag=false;cur.classList.remove('drag')});
+window.addEventListener('mousemove',e=>{if(!isDrag)return;vx=(e.clientX-px)*.006;vy=(e.clientY-py)*.006;obj.rotation.y+=vx;obj.rotation.x+=vy;px=e.clientX;py=e.clientY});
+let t=0;
+(function loop(){requestAnimationFrame(loop);t+=.008;
+  if(!isDrag){vx*=.94;vy*=.94;obj.rotation.y+=.004+vx;obj.rotation.x+=vy*.5}
+  obj.position.y=Math.sin(t*.7)*.12;ring.rotation.x=t*.3;ring.rotation.z=t*.2;
+  const sp=window.scrollY/window.innerHeight;const sc=Math.max(.15,1-sp*.85);
+  obj.scale.setScalar(sc);ring.scale.setScalar(sc);obj.position.x=sp*2.8;
+  renderer.render(scene,camera);
+})();
+window.addEventListener('resize',()=>{renderer.setSize(window.innerWidth,window.innerHeight);camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix()});
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}}),{threshold:.08});
+document.querySelectorAll('.sb,.ab,.pb,.mf,.ms,.cp,.content-grid,.profile-pic-wrap').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(40px)';
+  el.style.transition='opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)';
+  io.observe(el);
+});
+  </script>
+</body>
+</html>
