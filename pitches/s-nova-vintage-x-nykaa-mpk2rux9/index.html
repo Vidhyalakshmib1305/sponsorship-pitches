@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>@s.nova.vintage × Nykaa</title>
+<meta property="og:image" content="https://api.dicebear.com/9.x/lorelei/svg?seed=s.nova.vintage&backgroundColor=transparent">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#E8A87C;--text:#0a0805;--accent:#8B2500;--hero:#FF4500;--mu:rgba(10,8,5,.4);--on:#0a0805}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;cursor:none;overflow-x:hidden}
+
+/* CURSOR */
+#cur{position:fixed;width:100px;height:100px;border:1.5px solid rgba(255,255,255,.7);border-radius:50%;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:all .12s ease;
+  display:flex;align-items:center;justify-content:center;mix-blend-mode:difference}
+#cur span{font-size:7px;letter-spacing:.18em;text-align:center;line-height:1.5;text-transform:uppercase;
+  opacity:0;transition:opacity .3s;color:#fff}
+#cur.drag span{opacity:1}#cur.drag{width:130px;height:130px}#cur.sm{width:10px;height:10px}
+#cdot{position:fixed;width:4px;height:4px;background:#fff;border-radius:50%;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference}
+.prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:200;width:0%;transition:width .1s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 32px;display:flex;
+  align-items:center;justify-content:space-between;mix-blend-mode:difference}
+.nl,.nc{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#fff}
+.nc{position:absolute;left:50%;transform:translateX(-50%);letter-spacing:.22em}
+.nr{display:flex;gap:24px}
+.nr span{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#fff}
+
+/* ── HERO ── */
+#hero{position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--hero)}
+/* animated gradient overlay */
+#hero-grad{position:absolute;inset:0;z-index:1;
+  background:conic-gradient(from 0deg at 30% 60%,rgba(0,0,0,.35),transparent 40%,rgba(0,0,0,.2) 70%,transparent);
+  animation:gradSpin 20s linear infinite}
+@keyframes gradSpin{to{transform:rotate(360deg) scale(1.5)}}
+/* grain */
+#hero::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E")}
+.ht{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:0 48px;z-index:3;pointer-events:none}
+.hl{font-family:'Playfair Display',serif;font-size:clamp(62px,12.5vw,168px);font-weight:900;
+  letter-spacing:-4px;line-height:.86;color:var(--text);user-select:none;will-change:transform;
+  transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.hl.l2{text-indent:6vw}.hl.l3{text-indent:2vw}
+#three-canvas{position:absolute;inset:0;z-index:4;width:100%;height:100%}
+
+/* SPARKLE LAYER — canvas for particles on 3D hover */
+#sparkle-canvas{position:absolute;inset:0;z-index:5;pointer-events:none}
+
+.sh{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:10;
+  font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--text);
+  display:flex;align-items:center;gap:10px}
+.sl{width:36px;height:1px;background:var(--text);animation:pls 2s ease-in-out infinite}
+@keyframes pls{0%,100%{width:18px;opacity:.5}50%{width:44px;opacity:1}}
+.arb{position:absolute;bottom:26px;right:32px;z-index:10;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--text)}
+.ctb{position:absolute;bottom:26px;left:32px;z-index:10;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--text)}
+
+/* ── CREATOR SECTION ── */
+.section{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
+.s001{background:#0a0808;padding:80px 80px 60px}
+.s001-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;
+  max-width:1240px;margin:0 auto;width:100%}
+.sc{position:absolute;top:32px;left:80px;font-size:8px;letter-spacing:.28em;
+  text-transform:uppercase;color:rgba(245,240,232,.16)}
+
+.creator-profile{display:flex;flex-direction:column;gap:22px}
+.profile-pic-wrap{position:relative;width:fit-content}
+.profile-pic{width:130px;height:130px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--accent);display:block;background:rgba(255,255,255,.05)}
+.profile-pic.svg-av{padding:16px;background:rgba(255,255,255,.06)}
+.profile-pic-ring{position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);animation:spin 12s linear infinite}
+.profile-pic-dot{position:absolute;top:8px;right:8px;width:11px;height:11px;
+  border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px #0a0808}
+@keyframes spin{to{transform:rotate(360deg)}}
+.upload-hint{padding:8px 14px;background:rgba(255,255,255,.04);
+  border:1px dashed rgba(255,255,255,.12);font-size:7px;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(245,240,232,.3)}
+
+.slb{font-size:8px;letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(245,240,232,.28);margin-bottom:18px}
+.ch{font-family:'Playfair Display',serif;font-size:clamp(36px,6.5vw,78px);font-weight:900;
+  letter-spacing:-2px;line-height:.9;color:#f5f0e8}
+.cat{color:var(--accent)}
+.cn{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-top:10px}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:20px}
+.sb{background:rgba(245,240,232,.04);border:1px solid rgba(245,240,232,.05);
+  padding:20px 18px;transition:background .3s}
+.sb:hover{background:rgba(245,240,232,.07)}
+.sn{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,44px);font-weight:900;
+  letter-spacing:-2px;color:#f5f0e8;line-height:1}
+.su{color:var(--accent)}
+.slbl{font-size:7px;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(245,240,232,.28);margin-top:6px}
+
+.pr{padding-top:90px}
+.ptag{font-size:8px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.ptag::before{content:'';width:36px;height:1px;background:var(--accent)}
+.pg{font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,30px);font-weight:900;
+  letter-spacing:-1px;color:#f5f0e8;line-height:1.1;margin-bottom:24px}
+.pb{font-size:12px;line-height:1.9;color:rgba(245,240,232,.55)}
+.pb p{margin-bottom:16px}.pb p:last-child{margin-bottom:0}
+
+/* ── FILM ROLL ── */
+.film-roll-section{background:#0a0808;padding:0 0 60px;overflow:hidden;border-top:1px solid rgba(245,240,232,.05)}
+.film-roll-label{padding:20px 80px;font-size:7px;letter-spacing:.32em;
+  text-transform:uppercase;color:rgba(245,240,232,.22)}
+.film-roll-track{position:relative;overflow:hidden;height:340px}
+/* top/bottom sprocket strip */
+.film-roll-track::before,.film-roll-track::after{
+  content:'';position:absolute;left:0;right:0;height:18px;z-index:2;pointer-events:none;
+  background:repeating-linear-gradient(90deg,#0a0808 0,#0a0808 10px,rgba(245,240,232,.08) 10px,rgba(245,240,232,.08) 18px,#0a0808 18px,#0a0808 28px)}
+.film-roll-track::before{top:0}.film-roll-track::after{bottom:0}
+.film-roll-inner{display:flex;gap:4px;animation:filmScroll 28s linear infinite;width:max-content;padding:22px 0}
+.film-roll-inner:hover{animation-play-state:paused}
+.film-frame{width:220px;height:296px;flex-shrink:0;overflow:hidden;position:relative;
+  background:rgba(245,240,232,.04);border:1px solid rgba(245,240,232,.07)}
+.film-frame img{width:100%;height:100%;object-fit:cover;
+  filter:sepia(15%) contrast(1.08) brightness(.92);transition:filter .4s,transform .4s}
+.film-frame:hover img{filter:none;transform:scale(1.04)}
+.film-frame-num{position:absolute;bottom:6px;right:8px;font-size:7px;
+  letter-spacing:.18em;color:rgba(245,240,232,.35)}
+@keyframes filmScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── AUDIENCE SECTION ── */
+.s002{padding:80px;flex-direction:column;justify-content:center;
+  background:#0f0e0a;position:relative;overflow:hidden}
+/* animated mesh background */
+.s002-mesh{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.s002-mesh::before{content:'';position:absolute;width:600px;height:600px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,69,0,.07),transparent 65%);
+  top:-100px;left:-100px;animation:meshDrift1 14s ease-in-out infinite}
+.s002-mesh::after{content:'';position:absolute;width:500px;height:500px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,150,50,.05),transparent 65%);
+  bottom:-80px;right:-80px;animation:meshDrift2 18s ease-in-out infinite}
+@keyframes meshDrift1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+@keyframes meshDrift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-30px)}}
+/* diagonal grid lines */
+.s002-grid{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(245,240,232,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(245,240,232,.025) 1px,transparent 1px);
+  background-size:80px 80px}
+.s002-inner{max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1}
+.s002h{margin-bottom:52px;display:flex;justify-content:space-between;align-items:flex-end}
+.s002t{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,68px);font-weight:900;
+  letter-spacing:-2px;line-height:.9;color:#f5f0e8}
+.s002s{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.3)}
+.ag{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.ab{background:rgba(245,240,232,.03);border:1px solid rgba(245,240,232,.06);
+  padding:40px 28px;transition:all .35s;cursor:default;position:relative;overflow:hidden}
+.ab::before{content:'';position:absolute;inset:0;background:var(--accent);
+  transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.16,1,.3,1);z-index:0}
+.ab:hover::before{transform:scaleY(1)}
+.ab:hover{border-color:var(--accent)}
+.ai,.av,.ak{position:relative;z-index:1}
+.ai{font-size:22px;margin-bottom:18px;display:block}
+.av{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,46px);font-weight:900;
+  letter-spacing:-2px;color:#f5f0e8;line-height:1;margin-bottom:7px;transition:color .3s}
+.ak{font-size:7px;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(245,240,232,.35);transition:color .3s}
+.ab:hover .av{color:#0a0808}.ab:hover .ak{color:rgba(10,8,8,.6)}.ab:hover .ai{filter:brightness(0)}
+
+/* ── MOCKUP ── */
+.s003{padding:80px;background:#0a0808}
+.s003-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.mf{border:1px solid rgba(245,240,232,.07)}
+.mh{background:rgba(245,240,232,.04);border-bottom:1px solid rgba(245,240,232,.06);
+  padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.mt{font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.mi{width:100%;display:block;min-height:300px;object-fit:cover;filter:brightness(.9) saturate(1.1)}
+.mc{padding:12px 20px;font-size:7px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(245,240,232,.2);font-style:italic}
+.ms h3{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,54px);font-weight:900;
+  letter-spacing:-2px;color:#f5f0e8;line-height:.9;margin-bottom:24px}
+.vt{display:inline-block;border:1px solid var(--accent);padding:5px 14px;
+  font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.hr{width:100%;height:1px;background:rgba(245,240,232,.07);margin:24px 0}
+
+/* ── CTA ── */
+.s004{min-height:65vh;flex-direction:column;justify-content:center;padding:80px;
+  text-align:center;background:var(--accent);position:relative;overflow:hidden}
+.s004::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.18) 100%)}
+.cp{font-family:'Playfair Display',serif;font-size:clamp(70px,15vw,190px);font-weight:900;
+  letter-spacing:-5px;line-height:.85;color:var(--text);position:relative;z-index:1}
+.cs{font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--text);margin:24px 0 10px;position:relative;z-index:1;opacity:.7}
+.cn2{font-size:8px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(10,8,5,.38);position:relative;z-index:1;margin-bottom:32px}
+.cb{position:relative;z-index:1;background:var(--text);color:var(--accent);
+  font-size:9px;letter-spacing:.28em;text-transform:uppercase;padding:16px 48px;
+  border:none;font-family:'Space Mono',monospace;cursor:none;transition:opacity .2s}
+.cb:hover{opacity:.85}
+footer{background:#0a0808;padding:32px 80px;display:flex;justify-content:space-between;
+  align-items:center;border-top:1px solid rgba(245,240,232,.06)}
+.fl{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,240,232,.28)}
+.fr{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+
+@keyframes sUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
+.hl{animation:sUp .9s cubic-bezier(.16,1,.3,1) both}
+.l1{animation-delay:.1s}.l2{animation-delay:.22s}.l3{animation-delay:.34s}
+nav{animation:sUp .7s cubic-bezier(.16,1,.3,1) .05s both}
+
+@media(max-width:768px){
+  .s001-inner,.s003-inner{grid-template-columns:1fr}
+  .ag{grid-template-columns:1fr 1fr}
+  .s001,.s002,.s003,.s004{padding:48px 24px}
+  .pr{padding-top:36px}
+  nav{padding:18px 20px}
+  .film-roll-label{padding:16px 24px}
+  footer{padding:28px 24px;flex-direction:column;gap:12px;text-align:center}
+}
+  </style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+<div id="cur"><span>HOLD<br>AND<br>DRAG</span></div>
+<div id="cdot"></div>
+
+<nav>
+  <span class="nl">S.NOVA.VINTAGE</span>
+  <span class="nc">SPONSORSHIP.PITCH</span>
+  <div class="nr"><span>[ BRAND DECK ]</span><span>[ 001 ]</span><span>CONTACT</span></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div id="hero-grad"></div>
+  <div class="ht">
+    <div class="hl l1" data-speed="0.03">VINTAGE</div>
+    <div class="hl l2" data-speed="-0.04">MEETS</div>
+    <div class="hl l3" data-speed="0.025">MODERN</div>
+  </div>
+  <canvas id="three-canvas"></canvas>
+  <canvas id="sparkle-canvas"></canvas>
+  <div class="sh"><div class="sl"></div>SCROLL FOR MORE<div class="sl"></div></div>
+  <div class="arb">[ AR ]</div>
+  <div class="ctb">001</div>
+</section>
+
+<!-- S001 — CREATOR -->
+<section class="section s001">
+  <div class="sc">001 / CREATOR</div>
+  <div class="s001-inner">
+    <div class="creator-profile">
+      <div class="slb">The Creator</div>
+      <div class="profile-pic-wrap">
+        <img class="profile-pic svg-av" src="https://api.dicebear.com/9.x/lorelei/svg?seed=s.nova.vintage&backgroundColor=transparent" alt="@s.nova.vintage">
+        <div class="profile-pic-ring"></div>
+        <div class="profile-pic-dot"></div>
+      </div>
+      <div class="upload-hint">↑ Add your photo in dashboard settings</div>
+      <div>
+        <div class="ch"><span class="cat">@</span>s.nova.vintage</div>
+        <div class="cn">vintage Creator · aesthetic, curated, editorial</div>
+      </div>
+      <div class="sg">
+        <div class="sb"><div class="sn">28.0K</div><div class="slbl">Followers</div></div>
+        <div class="sb"><div class="sn">5.8<span class="su">%</span></div><div class="slbl">Engagement · 3.9× avg</div></div>
+        <div class="sb"><div class="sn">72<span class="su">%</span></div><div class="slbl">Primary audience</div></div>
+        <div class="sb"><div class="sn">88<span class="su">/100</span></div><div class="slbl">Brand fit score</div></div>
+      </div>
+    </div>
+    <div class="pr">
+      <div class="ptag">The Pitch · Nykaa</div>
+      <div class="pg">Influencer Partnerships Team,</div>
+      <div class="pb"><p>Nykaa's curation is exactly what my followers save on their wishlists every weekend — I figured it was time to make it official.</p><p>With 28,000 followers at a 5.8% engagement rate — nearly four times the industry average — my audience isn't just watching, they're buying. 72% are women aged 18–32 who already spend on curated beauty and fashion. They trust me because I'm one of them.</p><p>One post. ₹10,000. And it looks like it was always meant to be yours.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILM ROLL -->
+<div class="film-roll-section">
+  <div class="film-roll-label">Content Aesthetic · @s.nova.vintage · VINTAGE</div>
+  <div class="film-roll-track">
+    <div class="film-roll-inner">
+      
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=52893" alt="content 1" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">01</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=90182" alt="content 2" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">02</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=26983" alt="content 3" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">03</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=46462" alt="content 4" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">04</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=72154" alt="content 5" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">05</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=1291" alt="content 6" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">06</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=88271" alt="content 7" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">07</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=3357" alt="content 8" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">08</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=33443" alt="content 9" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">09</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=40002" alt="content 10" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">10</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=3202" alt="content 11" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">11</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=15415" alt="content 12" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">12</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=52893" alt="content 13" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">01</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=90182" alt="content 14" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">02</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=26983" alt="content 15" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">03</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=46462" alt="content 16" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">04</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=72154" alt="content 17" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">05</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=1291" alt="content 18" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">06</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=88271" alt="content 19" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">07</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=3357" alt="content 20" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">08</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=33443" alt="content 21" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">09</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=40002" alt="content 22" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">10</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=3202" alt="content 23" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">11</span>
+      </div>
+      <div class="film-frame">
+        <img src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20editorial%20instagram%20photo%2C%20India%20fashion%2C%20film%20grain%2C%20cinematic%20tones%2C%20no%20text?width=400&height=500&nologo=true&seed=15415" alt="content 24" loading="lazy"
+          onerror="this.parentElement.style.background='rgba(255,255,255,.04)'">
+        <span class="film-frame-num">12</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S002 — AUDIENCE -->
+<section class="section s002">
+  <div class="s002-mesh"></div>
+  <div class="s002-grid"></div>
+  <div class="sc" style="color:rgba(245,240,232,.16)">002 / AUDIENCE</div>
+  <div class="s002-inner">
+    <div class="s002h">
+      <div class="s002t">WHO IS<br>WATCHING</div>
+      <div class="s002s">Audience<br>breakdown</div>
+    </div>
+    <div class="ag">
+      <div class="ab"><span class="ai">◎</span><div class="av">72<span style="font-size:.5em;color:var(--accent)">%</span></div><div class="ak">Primary gender</div></div>
+      <div class="ab"><span class="ai">◈</span><div class="av">18-32</div><div class="ak">Age range</div></div>
+      <div class="ab"><span class="ai">◉</span><div class="av">IND</div><div class="ak">Top location</div></div>
+      <div class="ab"><span class="ai">◆</span><div class="av">5.8<span style="font-size:.5em;color:var(--accent)">%</span></div><div class="ak">Engagement rate</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S003 — MOCKUP -->
+<section class="section s003">
+  <div class="sc">003 / MOCKUP</div>
+  <div class="s003-inner">
+    <div class="mf">
+      <div class="mh">
+        <span class="mt">AI Mockup — Sponsored Post Concept</span>
+        <span style="font-size:7px;letter-spacing:.2em;color:rgba(245,240,232,.2)">◉ ◎ ◆</span>
+      </div>
+      <img class="mi" src="https://image.pollinations.ai/prompt/aesthetic%20vintage%20instagram%20post%2C%20Nykaa%20product%2C%20India%20aesthetic%2C%20editorial%20photography%2C%20film%20grain%20texture%2C%20warm%20tones%2C%20no%20text%20no%20watermark%2C%20high%20quality?width=600&height=400&nologo=true&seed=21355" alt="Mockup" loading="lazy"
+        onerror="this.style.minHeight='260px';this.style.background='rgba(255,69,0,.06)'">
+      <div class="mc">Concept — creator-produced and brand-approved before posting</div>
+    </div>
+    <div class="ms">
+      <span class="vt">[ @s.nova.vintage ]</span>
+      <h3>WHAT NYKAA<br>LOOKS LIKE<br>ON THIS FEED.</h3>
+      <div class="hr"></div>
+      <div class="pb">
+        <p>Perfect niche and demographic match — vintage aesthetic creator for India's leading beauty platform targeting young women.</p>
+        <p>Approval before publishing. No long contracts. Simple and quick.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section s004" style="min-height:60vh">
+  <div class="cp">$120</div>
+  <div class="cs">Rate per sponsored post</div>
+  <div class="cn2">No long contracts · Approval before posting · 48hr turnaround</div>
+  <button class="cb" onclick="window.location.href='mailto:?subject=Nykaa x @s.nova.vintage'">
+    REPLY TO DISCUSS →
+  </button>
+</section>
+
+<footer>
+  <span class="fl">@s.nova.vintage · Instagram · vintage Creator</span>
+  <span class="fr">Powered by Sponsorship Prospector</span>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ── CURSOR ──
+const cur=document.getElementById('cur'),cdot=document.getElementById('cdot');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cdot.style.left=mx+'px';cdot.style.top=my+'px'});
+setInterval(()=>{cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cur.style.left=cx+'px';cur.style.top=cy+'px'},16);
+document.querySelectorAll('button,.sb,.ab,.film-frame').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('sm'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('sm'));
+});
+
+// ── PROGRESS ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('prog').style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+});
+
+// ── PARALLAX TEXT ──
+document.addEventListener('mousemove',e=>{
+  const rx=(e.clientX/window.innerWidth-.5)*2,ry=(e.clientY/window.innerHeight-.5)*2;
+  document.querySelectorAll('.hl').forEach(el=>{
+    const sp=parseFloat(el.dataset.speed||0);
+    el.style.transform='translate('+(rx*sp*100)+'px,'+(ry*sp*40)+'px)';
+  });
+});
+
+// ── SPARKLE PARTICLES on 3D hover ──
+const spCanvas=document.getElementById('sparkle-canvas');
+const spCtx=spCanvas.getContext('2d');
+spCanvas.width=window.innerWidth;spCanvas.height=window.innerHeight;
+const particles=[];
+let isHoveringHero=false;
+
+class Sparkle{
+  constructor(x,y){
+    this.x=x;this.y=y;
+    this.vx=(Math.random()-.5)*3;this.vy=(Math.random()-1)*4;
+    this.life=1;this.decay=Math.random()*.03+.02;
+    this.size=Math.random()*4+1;
+    this.color=Math.random()>.5?'#8B2500':'#ffffff';
+  }
+  update(){this.x+=this.vx;this.y+=this.vy;this.vy+=.12;this.life-=this.decay}
+  draw(){
+    spCtx.save();spCtx.globalAlpha=this.life;
+    spCtx.fillStyle=this.color;
+    spCtx.shadowBlur=12;spCtx.shadowColor=this.color;
+    spCtx.beginPath();spCtx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    spCtx.fill();spCtx.restore();
+  }
+}
+
+document.getElementById('three-canvas').addEventListener('mousemove',e=>{
+  isHoveringHero=true;
+  // emit sparkles at mouse position
+  if(Math.random()>.4){
+    for(let i=0;i<3;i++) particles.push(new Sparkle(e.clientX,e.clientY));
+  }
+});
+document.getElementById('three-canvas').addEventListener('mouseleave',()=>{isHoveringHero=false});
+
+function animateSparkles(){
+  requestAnimationFrame(animateSparkles);
+  spCtx.clearRect(0,0,spCanvas.width,spCanvas.height);
+  for(let i=particles.length-1;i>=0;i--){
+    particles[i].update();particles[i].draw();
+    if(particles[i].life<=0) particles.splice(i,1);
+  }
+}
+animateSparkles();
+
+// ── THREE.JS ──
+const canvas=document.getElementById('three-canvas');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.6;
+
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,.1,100);
+camera.position.z=5;
+
+// Lighting
+scene.add(new THREE.AmbientLight(0xffffff,.25));
+const dl=new THREE.DirectionalLight(0xffffff,1.8);dl.position.set(4,5,3);scene.add(dl);
+const pl=new THREE.PointLight(9118976,1.2,12);
+pl.position.set(-3,2,-2);scene.add(pl);
+const pl2=new THREE.PointLight(0xffffff,.5,8);pl2.position.set(3,-2,4);scene.add(pl2);
+// hover glow light
+const hoverLight=new THREE.PointLight(9118976,0,6);
+hoverLight.position.set(0,0,3);scene.add(hoverLight);
+
+// Env sphere — richer than flat color
+const envGeo=new THREE.SphereGeometry(50,32,32);
+const envMat=new THREE.MeshBasicMaterial({
+  color:16729344,
+  side:THREE.BackSide
+});
+scene.add(new THREE.Mesh(envGeo,envMat));
+
+// Main object
+const geo=new THREE.TorusKnotGeometry(1.1,.38,200,20,2,3);
+const mat=new THREE.MeshStandardMaterial({
+  color:0xD4A870,metalness:.98,roughness:.06,envMapIntensity:1.5
+});
+const obj=new THREE.Mesh(geo,mat);scene.add(obj);
+
+// Ring
+const ring=new THREE.Mesh(
+  new THREE.TorusGeometry(1.9,.01,8,120),
+  new THREE.MeshBasicMaterial({color:9118976,transparent:true,opacity:.3})
+);
+scene.add(ring);
+
+// Second smaller ring
+const ring2=new THREE.Mesh(
+  new THREE.TorusGeometry(1.4,.008,8,100),
+  new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.12})
+);
+ring2.rotation.x=Math.PI/3;scene.add(ring2);
+
+// Drag
+let isDrag=false,px=0,py=0,vx=0,vy=0;
+canvas.addEventListener('mousedown',e=>{isDrag=true;px=e.clientX;py=e.clientY;vx=vy=0;cur.classList.add('drag')});
+window.addEventListener('mouseup',()=>{isDrag=false;cur.classList.remove('drag')});
+window.addEventListener('mousemove',e=>{
+  if(!isDrag)return;
+  vx=(e.clientX-px)*.006;vy=(e.clientY-py)*.006;
+  obj.rotation.y+=vx;obj.rotation.x+=vy;
+  px=e.clientX;py=e.clientY;
+});
+
+// Hover glow ramp
+let hoverGlow=0;
+canvas.addEventListener('mouseenter',()=>isHoveringHero=true);
+
+let t=0;
+(function loop(){
+  requestAnimationFrame(loop);t+=.008;
+  if(!isDrag){vx*=.93;vy*=.93;obj.rotation.y+=.004+vx;obj.rotation.x+=vy*.5}
+  obj.position.y=Math.sin(t*.7)*.14;
+  ring.rotation.z=t*.15;ring2.rotation.y=t*.2;
+  // scroll scale/move
+  const sp=window.scrollY/window.innerHeight;
+  const sc=Math.max(.15,1-sp*.88);
+  obj.scale.setScalar(sc);ring.scale.setScalar(sc);ring2.scale.setScalar(sc);
+  obj.position.x=sp*3;
+  // hover glow
+  hoverGlow+=(isHoveringHero?.08:-.05);
+  hoverGlow=Math.max(0,Math.min(1,hoverGlow));
+  hoverLight.intensity=hoverGlow*2.5;
+  // shimmer material on hover
+  mat.emissive.setHex(isHoveringHero?9118976:0x000000);
+  mat.emissiveIntensity=hoverGlow*.25;
+  renderer.render(scene,camera);
+})();
+
+window.addEventListener('resize',()=>{
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  spCanvas.width=window.innerWidth;spCanvas.height=window.innerHeight;
+  camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();
+});
+
+// ── SCROLL REVEAL ──
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}
+}),{threshold:.08});
+document.querySelectorAll('.sb,.ab,.pb,.mf,.ms,.cp,.profile-pic-wrap,.film-roll-section').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(36px)';
+  el.style.transition='opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)';
+  io.observe(el);
+});
+  </script>
+</body>
+</html>
